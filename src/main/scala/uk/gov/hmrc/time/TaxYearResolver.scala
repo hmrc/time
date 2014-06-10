@@ -33,7 +33,7 @@ private[time] trait TaxYearResolver {
   }
 
   def fallsInThisTaxYear(currentDate: LocalDate): Boolean = {
-    val earliestDateForCurrentTaxYear = new LocalDate(taxYearFor(currentDate), 4, 6)
+    val earliestDateForCurrentTaxYear = new LocalDate(taxYearFor(now().toLocalDate), 4, 6)
     earliestDateForCurrentTaxYear.isBefore(currentDate) || earliestDateForCurrentTaxYear.isEqual(currentDate)
   }
 
