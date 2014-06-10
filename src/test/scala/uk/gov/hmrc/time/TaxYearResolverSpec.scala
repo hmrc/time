@@ -18,18 +18,18 @@ package uk.gov.hmrc.time
 import org.joda.time.{ DateTimeZone, DateTime, LocalDate }
 import org.scalatest.{WordSpecLike, Matchers}
 
-object Resolver {
-
-  def apply(currentTime: DateTime) = new TaxYearResolver {
-    private[time] override val now = () => currentTime
-  }
-
-  def apply() = new TaxYearResolver {
-    private[time] override val now = () => new DateTime(2013, 9, 24, 11, 39, 55, 222, DateTimeZone.forID("Europe/London"))
-  }
-}
-
 class TaxYearResolverSpec extends WordSpecLike with Matchers {
+
+  object Resolver {
+
+    def apply(currentTime: DateTime) = new TaxYearResolver {
+      private[time] override val now = () => currentTime
+    }
+
+    def apply() = new TaxYearResolver {
+      private[time] override val now = () => new DateTime(2013, 9, 24, 11, 39, 55, 222, DateTimeZone.forID("Europe/London"))
+    }
+  }
 
   "Requesting the tax year for a date" should {
 

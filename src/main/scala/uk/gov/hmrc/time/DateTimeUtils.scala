@@ -27,38 +27,3 @@ trait DateTimeUtils {
 }
 
 object DateTimeUtils extends DateTimeUtils
-
-private[time] trait TaxYearResolver {
-
-  private[time] val now: () => DateTime
-
-  private val ukTime = DateTimeZone.forID("Europe/London")
-
-  def taxYearFor(dateToResolve: LocalDate): Int = {
-    val year = dateToResolve.year.get
-
-    if (dateToResolve.isBefore(new LocalDate(year, 4, 6)))
-      year - 1
-    else
-      year
-  }
-
-  def currentTaxYear: Int = taxYearFor(new LocalDate(now(), ukTime))
-
-  def currentTaxYearYearsRange = currentTaxYear to currentTaxYear + 1
-
-  def startOfTaxYear(year: Int) = new LocalDate(year, 4, 6)
-
-  def startOfCurrentTaxYear = startOfTaxYear(currentTaxYear)
-
-  def endOfCurrentTaxYear = new LocalDate(currentTaxYear + 1, 4, 5)
-
-  def startOfNextTaxYear = new LocalDate(currentTaxYear + 1, 4, 6)
-
-  def taxYearInterval = new Interval(TaxYearResolver.startOfCurrentTaxYear.toDateTimeAtStartOfDay(ukTime),
-    TaxYearResolver.startOfNextTaxYear.toDateTimeAtStartOfDay(ukTime))
-}
-
-object TaxYearResolver extends TaxYearResolver {
-  override private[time] val now = () => DateTimeUtils.now
-}
