@@ -2,7 +2,6 @@
 
 [ -z "PS1" ] && trap "error_exit" 1 2 3 15 ERR 
 
-MAVEN_VERSION=3.0.5
 SBT_VERSION=0.13.5
 
 SBT_DOWNLOAD="http://dl.bintray.com/sbt/native-packages/sbt/${SBT_VERSION}/sbt-${SBT_VERSION}.tgz"
@@ -13,19 +12,6 @@ function error_exit
 	[ -f ./stop-all.sh ] && ./stop-all.sh
 	exit 1
 }
-
-MAVEN_DIR=~/.maven
-MAVEN_ARTIFACT=apache-maven-${MAVEN_VERSION}
-MAVEN_DOWNLOAD="http://alphagov.github.com/devutil/apache-maven-${MAVEN_VERSION}-bin.tar.gz"
-MAVEN_TMP=/tmp/${MAVEN_ARTIFACT}.tar.gz
-
-if [ ! -d ${MAVEN_DIR} ]
-then
-	mkdir -p ${MAVEN_DIR}
-	echo "Downloading ${MAVEN_DOWNLOAD}"
-	curl -o ${MAVEN_TMP} "${MAVEN_DOWNLOAD}"
-	tar zxvf ${MAVEN_TMP} -C ${MAVEN_DIR}
-fi
 
 SBT_DIR=~/.sbt-jars
 SBT_ARTIFACT=sbt-${SBT_VERSION}-launch.jar
@@ -41,6 +27,3 @@ then
 	tar zxvf ${SBT_TMP} -C /tmp
 	cp /tmp/sbt/bin/sbt-launch.jar ${SBT_FILE}
 fi
-
-export M2_HOME=${MAVEN_DIR}/${MAVEN_ARTIFACT}
-export PATH=${M2_HOME}/bin:${PATH}
