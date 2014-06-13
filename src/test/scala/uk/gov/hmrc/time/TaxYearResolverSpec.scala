@@ -23,11 +23,11 @@ class TaxYearResolverSpec extends WordSpecLike with Matchers {
   object Resolver {
 
     def apply(currentTime: DateTime) = new TaxYearResolver {
-      private[time] override val now = () => currentTime
+      override lazy val now = () => currentTime
     }
 
     def apply() = new TaxYearResolver {
-      private[time] override val now = () => new DateTime(2013, 9, 24, 11, 39, 55, 222, DateTimeZone.forID("Europe/London"))
+      override lazy val now = () => new DateTime(2013, 9, 24, 11, 39, 55, 222, DateTimeZone.forID("Europe/London"))
     }
   }
 

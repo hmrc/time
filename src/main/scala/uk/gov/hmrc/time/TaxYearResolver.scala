@@ -15,13 +15,13 @@
  */
 package uk.gov.hmrc.time
 
-import org.joda.time.{Interval, LocalDate, DateTimeZone, DateTime}
+trait TaxYearResolver {
 
-private[time] trait TaxYearResolver {
+  import org.joda.time.{Interval, LocalDate, DateTimeZone, DateTime}
 
-  private[time] val now: () => DateTime
+  lazy val now: () => DateTime = ???
 
-  private val ukTime = DateTimeZone.forID("Europe/London")
+  private val ukTime : DateTimeZone = DateTimeZone.forID("Europe/London")
 
   def taxYearFor(dateToResolve: LocalDate): Int = {
     val year = dateToResolve.year.get
@@ -54,5 +54,5 @@ private[time] trait TaxYearResolver {
 }
 
 object TaxYearResolver extends TaxYearResolver {
-  override private[time] val now = () => DateTimeUtils.now
+  override lazy val now = () => DateTimeUtils.now
 }
