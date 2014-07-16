@@ -7,7 +7,7 @@ object HmrcBuild extends Build {
   import BuildDependencies._
 
   val nameApp = "time"
-  val versionApp = "0.5.0-SNAPSHOT"
+  val versionApp = "1.0.0-SNAPSHOT"
 
   val appDependencies = Seq(
     Compile.nscalaTime,
@@ -16,14 +16,15 @@ object HmrcBuild extends Build {
     Test.pegdown
   )
 
-  lazy val root = Project(nameApp, file("."), settings = DefaultBuildSettings(nameApp, versionApp, targetJvm = "jvm-1.7")() ++ Seq(
+  lazy val root = Project(nameApp, file("."), settings = DefaultBuildSettings(nameApp, versionApp, scalaversion = "2.11.1", targetJvm = "jvm-1.7")() ++ Seq(
     libraryDependencies ++= appDependencies, 
     resolvers := Seq(
       Opts.resolver.sonatypeReleases,
       Opts.resolver.sonatypeSnapshots,
       "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
       "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
-    )
+    ),
+    crossScalaVersions := Seq("2.11.1", "2.10.4")
   ) ++ SonatypeBuild()
   )
 
@@ -32,12 +33,12 @@ object HmrcBuild extends Build {
 private object BuildDependencies {
 
   object Compile {
-    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.2.0"
+    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.2.0" cross CrossVersion.binary
   }
 
   sealed abstract class Test(scope: String) {
-    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.0" % scope
-    val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope
+    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.0" % scope cross CrossVersion.binary
+    val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope cross CrossVersion.Disabled
   }
 
   object Test extends Test("test")
