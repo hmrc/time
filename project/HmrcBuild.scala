@@ -7,7 +7,7 @@ object HmrcBuild extends Build {
   import BuildDependencies._
 
   val nameApp = "time"
-  val versionApp = "1.0.0"
+  val versionApp = "1.1.0-SNAPSHOT"
 
   val appDependencies = Seq(
     Compile.nscalaTime,
