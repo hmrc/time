@@ -7,7 +7,7 @@ object HmrcBuild extends Build {
   import BuildDependencies._
 
   val nameApp = "time"
-  val versionApp = "1.0.0-SNAPSHOT"
+  val versionApp = "1.0.0"
 
   val appDependencies = Seq(
     Compile.nscalaTime,
@@ -16,7 +16,7 @@ object HmrcBuild extends Build {
     Test.pegdown
   )
 
-  lazy val root = Project(nameApp, file("."), settings = DefaultBuildSettings(nameApp, versionApp, scalaversion = "2.11.1", targetJvm = "jvm-1.7")() ++ Seq(
+  lazy val root = Project(nameApp, file("."), settings = DefaultBuildSettings(nameApp, versionApp, targetJvm = "jvm-1.7")() ++ Seq(
     libraryDependencies ++= appDependencies, 
     resolvers := Seq(
       Opts.resolver.sonatypeReleases,
