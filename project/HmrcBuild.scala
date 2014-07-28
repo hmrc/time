@@ -1,32 +1,37 @@
 import sbt._
 import Keys._
 
+
 object HmrcBuild extends Build {
 
   import uk.gov.hmrc.DefaultBuildSettings
+  import DefaultBuildSettings._
   import BuildDependencies._
 
-  val nameApp = "time"
-  val versionApp = "1.1.0-SNAPSHOT"
+  val versionApp = "1.0.1-SNAPSHOT"
 
-  val appDependencies = Seq(
-    Compile.nscalaTime,
-
-    Test.scalaTest,
-    Test.pegdown
-  )
-
-  lazy val root = Project(nameApp, file("."), settings = DefaultBuildSettings(nameApp, versionApp, targetJvm = "jvm-1.7")() ++ Seq(
-    libraryDependencies ++= appDependencies, 
-    resolvers := Seq(
-      Opts.resolver.sonatypeReleases,
-      Opts.resolver.sonatypeSnapshots,
+  lazy val time = (project in file("."))
+    .settings(version := versionApp)
+    .settings(scalaSettings : _*)
+    .settings(defaultSettings() : _*)
+    .settings(
+      targetJvm := "jvm-1.7",
+      shellPrompt := ShellPrompt(versionApp),
+      libraryDependencies ++= Seq(
+        Compile.nscalaTime,
+        Test.scalaTest,
+        Test.pegdown
+      ),
+      resolvers := Seq(
+        Opts.resolver.sonatypeReleases,
+        Opts.resolver.sonatypeSnapshots,
       "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
       "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
-    ),
-    crossScalaVersions := Seq("2.11.1", "2.10.4")
-  ) ++ SonatypeBuild()
-  )
+      ),
+      crossScalaVersions := Seq("2.11.2", "2.10.4")
+    )
+    .settings(SbtBuildInfo(): _*)
+    .settings(SonatypeBuild(): _*)
 
 }
 
@@ -53,7 +58,7 @@ object SonatypeBuild {
 
   def apply() = {
     sonatypeSettings ++ Seq(
-    pomExtra := (<url>https://www.gov.uk/government/organisations/hm-revenue-customs</url>
+      pomExtra := (<url>https://www.gov.uk/government/organisations/hm-revenue-customs</url>
         <licenses>
           <license>
             <name>Apache 2</name>
