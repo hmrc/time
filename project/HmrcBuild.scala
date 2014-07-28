@@ -1,12 +1,12 @@
 import sbt._
 import Keys._
 
-
 object HmrcBuild extends Build {
 
   import uk.gov.hmrc.DefaultBuildSettings
   import DefaultBuildSettings._
   import BuildDependencies._
+  import uk.gov.hmrc.{SbtBuildInfo, ShellPrompt}
 
   val versionApp = "1.0.1-SNAPSHOT"
 
@@ -38,12 +38,12 @@ object HmrcBuild extends Build {
 private object BuildDependencies {
 
   object Compile {
-    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.2.0" cross CrossVersion.binary
+    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.2.0"
   }
 
   sealed abstract class Test(scope: String) {
-    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.0" % scope cross CrossVersion.binary
-    val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope cross CrossVersion.Disabled
+    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.0" % scope
+    val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope
   }
 
   object Test extends Test("test")
