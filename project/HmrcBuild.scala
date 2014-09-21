@@ -42,7 +42,7 @@ private object BuildDependencies {
   }
 
   sealed abstract class Test(scope: String) {
-    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.0" % scope
+    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.1" % scope
     val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope
   }
 
