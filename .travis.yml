@@ -1,0 +1,14 @@
+# See http://about.travis-ci.org/docs/user/build-configuration/
+language: scala
+scala:
+   - 2.10.4
+   - 2.11.2
+jdk:
+  - oraclejdk7
+branches:
+  only:
+    - master
+notifications:
+  email:
+    recipients:
+      - hmrc-web-operations@digital.cabinet-office.gov.uk
