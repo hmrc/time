@@ -13,7 +13,7 @@ This is a date and time utility featuring some specific utilities relating to UK
 
 For scala 2.11.x versions +1.x.x
 ```scala
-"uk.gov.hmrc" % "time" % "1.0.0"
+"uk.gov.hmrc" % "time" % "1.0.1"
 ```
 
 For scala 2.10.x
