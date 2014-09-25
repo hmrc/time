@@ -54,26 +54,10 @@ private object BuildDependencies {
 
 object SonatypeBuild {
 
-  private def sonatypeCredentials = (for {
-    username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-    password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
-  } yield credentials += Credentials(
-      "Sonatype Nexus Repository Manager",
-      "oss.sonatype.org",
-      username,
-      password)
-    ).getOrElse(credentials ++= Seq())
+  import xerial.sbt.Sonatype._
 
   def apply() = {
-    Seq(
-      sonatypeCredentials,
-      publishTo := {
-        val nexus = "https://oss.sonatype.org/"
-        if (isSnapshot.value)
-          Some("snapshots" at nexus + "content/repositories/snapshots")
-        else
-          Some("releases" at nexus + "service/local/staging/deploy/maven2")
-      },
+    sonatypeSettings ++ Seq(
       pomExtra := (<url>https://www.gov.uk/government/organisations/hm-revenue-customs</url>
         <licenses>
           <license>
@@ -126,4 +110,6 @@ object SonatypeBuild {
     )
   }
 }
+
+
 

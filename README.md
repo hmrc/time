@@ -3,8 +3,6 @@ time
 
 This is a date and time utility featuring some specific utilities relating to UK Tax.
 
-[![Build Status](https://secure.travis-ci.org/hmrc/time.png)](https://travis-ci.org/hmrc/time)
-
 ### Features
 * **workingdays**
 * **DateConverter**
