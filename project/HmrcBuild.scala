@@ -28,7 +28,7 @@ object HmrcBuild extends Build {
       "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
       "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
       ),
-      crossScalaVersions := Seq("2.11.2", "2.10.4")
+      crossScalaVersions := Seq("2.11.5", "2.11.4", "2.10.4")
     )
     .settings(SbtBuildInfo(): _*)
     .settings(SonatypeBuild(): _*)
@@ -38,7 +38,7 @@ object HmrcBuild extends Build {
 private object BuildDependencies {
 
   object Compile {
-    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.2.0"
+    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.6.0"
   }
 
   sealed abstract class Test(scope: String) {
@@ -47,8 +47,6 @@ private object BuildDependencies {
   }
 
   object Test extends Test("test")
-
-  object IntegrationTest extends Test("it")
 
 }
 
@@ -99,11 +97,6 @@ object SonatypeBuild {
           <developer>
             <id>davesammut</id>
             <name>Dave Sammut</name>
-            <url>http://www.equalexperts.com</url>
-          </developer>
-          <developer>
-            <id>ericvlaanderen</id>
-            <name>Eric Vlaanderen</name>
             <url>http://www.equalexperts.com</url>
           </developer>
         </developers>)
