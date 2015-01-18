@@ -202,16 +202,16 @@ class TaxYearResolverSpec extends WordSpecLike with Matchers {
 
     val currentYear = new LocalDate().year.get
 
-    "return false when issue date is 31st Dec of the previous year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear-1, 12, 31)) shouldBe false
+    "return true when issue date is 31st Dec of the previous year" in {
+      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear-1, 12, 31)) shouldBe true
     }
 
-    "return false when issue date is 1st January of the current year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 1, 1)) shouldBe false
+    "return true when issue date is 1st January of the current year" in {
+      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 1, 1)) shouldBe true
     }
 
-    "return false when issue date is 5th April of the current year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 4, 5)) shouldBe false
+    "return true when issue date is 5th April of the current year" in {
+      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 4, 5)) shouldBe true
     }
 
     "return true when issue date is 6th April of the current year" in {
