@@ -8,7 +8,7 @@ object HmrcBuild extends Build {
   import BuildDependencies._
   import uk.gov.hmrc.{SbtBuildInfo, ShellPrompt}
 
-  val versionApp = "1.1.0"
+  val versionApp = "1.2.0-SNAPSHOT"
 
   lazy val time = (project in file("."))
     .settings(version := versionApp)
