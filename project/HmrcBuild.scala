@@ -3,6 +3,7 @@ import Keys._
 
 object HmrcBuild extends Build {
 
+  import de.heikoseeberger.sbtheader.AutomateHeaderPlugin
   import uk.gov.hmrc.DefaultBuildSettings
   import DefaultBuildSettings._
   import BuildDependencies._
@@ -11,6 +12,7 @@ object HmrcBuild extends Build {
   val versionApp = "1.2.0-SNAPSHOT"
 
   lazy val time = (project in file("."))
+    .enablePlugins(AutomateHeaderPlugin)
     .settings(version := versionApp)
     .settings(scalaSettings : _*)
     .settings(defaultSettings() : _*)
@@ -25,10 +27,11 @@ object HmrcBuild extends Build {
       resolvers := Seq(
         Opts.resolver.sonatypeReleases,
         Opts.resolver.sonatypeSnapshots,
-      "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
-      "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
+        "typesafe-releases" at "http://repo.typesafe.com/typesafe/releases/",
+        "typesafe-snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
       ),
-      crossScalaVersions := Seq("2.11.5", "2.11.4", "2.10.4")
+      crossScalaVersions := Seq("2.11.6"),
+      HeaderSettings()
     )
     .settings(SbtBuildInfo(): _*)
     .settings(SonatypeBuild(): _*)
@@ -38,12 +41,12 @@ object HmrcBuild extends Build {
 private object BuildDependencies {
 
   object Compile {
-    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.6.0"
+    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "1.8.0"
   }
 
   sealed abstract class Test(scope: String) {
-    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.1" % scope
-    val pegdown = "org.pegdown" % "pegdown" % "1.4.2" % scope
+    val scalaTest = "org.scalatest" %% "scalatest" % "2.2.4" % scope
+    val pegdown = "org.pegdown" % "pegdown" % "1.5.0" % scope
   }
 
   object Test extends Test("test")
@@ -102,6 +105,14 @@ object SonatypeBuild {
         </developers>)
     )
   }
+}
+
+object HeaderSettings {
+  import org.joda.time.DateTime
+  import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport._
+  import de.heikoseeberger.sbtheader.license.Apache2_0
+
+  def apply() = headers := Map("scala" -> Apache2_0(DateTime.now().getYear.toString, "HM Revenue & Customs"))
 }
 
 
