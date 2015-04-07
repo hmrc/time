@@ -12,7 +12,10 @@ This is a date and time utility featuring some specific utilities relating to UK
 
 ### Adding time as a dependency
 
-For scala 2.11.x versions +1.x.x
 ```scala
-"uk.gov.hmrc" % "time" % "1.0.1"
+"uk.gov.hmrc" % "time" % "x.x.x"
 ```
+
+## License ##
+ 
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
