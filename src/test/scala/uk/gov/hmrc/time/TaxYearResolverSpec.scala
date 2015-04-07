@@ -201,26 +201,30 @@ class TaxYearResolverSpec extends WordSpecLike with Matchers {
 
   "local date falling in this tax year" should {
 
-    val currentYear = new LocalDate().year.get
+    object TaxYearResolverForTest extends TaxYearResolver {
+      override lazy val now: () => DateTime = () => new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
+    }
+
+    val currentYear = 2015
 
     "return true when issue date is 31st Dec of the previous year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear-1, 12, 31)) shouldBe true
+      TaxYearResolverForTest.fallsInThisTaxYear(new LocalDate(currentYear-1, 12, 31)) shouldBe true
     }
 
     "return true when issue date is 1st January of the current year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 1, 1)) shouldBe true
+      TaxYearResolverForTest.fallsInThisTaxYear(new LocalDate(currentYear, 1, 1)) shouldBe true
     }
 
     "return true when issue date is 5th April of the current year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 4, 5)) shouldBe true
+      TaxYearResolverForTest.fallsInThisTaxYear(new LocalDate(currentYear, 4, 5)) shouldBe true
     }
 
     "return true when issue date is 6th April of the current year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear, 4, 6)) shouldBe true
+      TaxYearResolverForTest.fallsInThisTaxYear(new LocalDate(currentYear, 4, 6)) shouldBe true
     }
 
     "return true when PXX8 issue date is 1st Jan of the next year" in {
-      TaxYearResolver.fallsInThisTaxYear(new LocalDate(currentYear+1, 1, 1)) shouldBe true
+      TaxYearResolverForTest.fallsInThisTaxYear(new LocalDate(currentYear+1, 1, 1)) shouldBe true
     }
   }
 }
