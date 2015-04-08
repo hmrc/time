@@ -5,12 +5,14 @@ import uk.gov.hmrc.SbtAutoBuildPlugin
 object HmrcBuild extends Build {
 
   import BuildDependencies._
+  import uk.gov.hmrc.DefaultBuildSettings._
 
-  val versionApp = "1.2.0"
+  val versionApp = "1.2.1"
 
   lazy val time = (project in file("."))
     .enablePlugins(SbtAutoBuildPlugin)
     .settings(
+      targetJvm := "jvm-1.7",
       version := versionApp,
       libraryDependencies ++= Seq(
         Compile.nscalaTime,
