@@ -7,11 +7,13 @@ object HmrcBuild extends Build {
   import BuildDependencies._
   import uk.gov.hmrc.DefaultBuildSettings._
 
-  val versionApp = "1.3.0-SNAPSHOT"
+  val versionApp = "1.3.0"
+  val appName = "time"
 
   lazy val time = (project in file("."))
     .enablePlugins(SbtAutoBuildPlugin)
     .settings(
+      name := "time",
       targetJvm := "jvm-1.7",
       version := versionApp,
       libraryDependencies ++= Seq(
@@ -19,7 +21,8 @@ object HmrcBuild extends Build {
         Test.scalaTest,
         Test.pegdown
       ),
-      crossScalaVersions := Seq("2.11.6")
+      crossScalaVersions := Seq("2.11.6"),
+      ArtefactDescription()
     )
 }
 
