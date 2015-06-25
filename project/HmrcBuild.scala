@@ -14,7 +14,6 @@ object HmrcBuild extends Build {
     .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning)
     .settings(
       name := "time",
-      targetJvm := "jvm-1.7",
       libraryDependencies ++= Seq(
         Compile.nscalaTime,
         Test.scalaTest,
