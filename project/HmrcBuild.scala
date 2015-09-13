@@ -19,7 +19,6 @@ object HmrcBuild extends Build {
         Test.scalaTest,
         Test.pegdown
       ),
-      targetJvm := "jvm-1.7",
       scalaVersion := "2.11.7",
       crossScalaVersions := Seq("2.11.7"),
       developers := List(Developer("duncancrawford", "Duncan Crawford", "duncan.crawford@digital.hmrc.gov.uk", new URL("http://www.hmrc.gov.uk")),
@@ -32,7 +31,7 @@ object HmrcBuild extends Build {
 private object BuildDependencies {
 
   object Compile {
-    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "2.0.0"
+    val nscalaTime = "com.github.nscala-time" %% "nscala-time" % "2.2.0"
   }
 
   sealed abstract class Test(scope: String) {

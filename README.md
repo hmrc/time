@@ -16,7 +16,7 @@ This is a date and time utility featuring some specific utilities relating to UK
 "uk.gov.hmrc" % "time" % "[INSERT_VERSION]"
 ```
 
-For Java 7 use a version <= 1.4.0
+For Java 7 use a version <= 2.0.0
 
 ## License ##
  
