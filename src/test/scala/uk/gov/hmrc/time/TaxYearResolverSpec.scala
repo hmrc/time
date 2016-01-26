@@ -227,4 +227,42 @@ class TaxYearResolverSpec extends WordSpecLike with Matchers {
       TaxYearResolverForTest.fallsInThisTaxYear(new LocalDate(currentYear+1, 1, 1)) shouldBe true
     }
   }
+
+  "Requesting end of the last tax year" should {
+    "Return 2012/4/5 when the current UK time is 23:59:59.999 on 2013/4/5" in {
+      val currentTime = new DateTime(2013, 4, 5, 23, 59, 59, 999, DateTimeZone.forID("Europe/London"))
+      Resolver(currentTime).endOfLastTaxYear shouldBe new LocalDate(2012, 4, 5)
+    }
+
+    "Return 2013/4/5 when the current UK time is 00:00:00.000 on 2013/4/6" in {
+      val currentTime = new DateTime(2013, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
+      Resolver(currentTime).endOfLastTaxYear shouldBe new LocalDate(2013, 4, 5)
+    }
+
+    "Return 2013/4/5 when the current UK time is 11:06:23.323 on 2013/9/24" in {
+      val currentTime = new DateTime(2013, 9, 24, 11, 6, 23, 323, DateTimeZone.forID("Europe/London"))
+      Resolver(currentTime).endOfLastTaxYear shouldBe new LocalDate(2013, 4, 5)
+    }
+
+    "Return 2013/4/5 when the current UK time is 11:06:23.323 on 2014/2/1" in {
+      val currentTime = new DateTime(2014, 2, 1, 11, 6, 23, 323, DateTimeZone.forID("Europe/London"))
+      Resolver(currentTime).endOfLastTaxYear shouldBe new LocalDate(2013, 4, 5)
+    }
+
+    "Return 2013/4/5 when the current UK time is 23:59:59.999 on 2014/4/5" in {
+      val currentTime = new DateTime(2014, 4, 5, 23, 59, 59, 999, DateTimeZone.forID("Europe/London"))
+      Resolver(currentTime).endOfLastTaxYear shouldBe new LocalDate(2013, 4, 5)
+    }
+
+    "Return 2014/4/5 when the current UK time is 00:00:00.000 on 2014/4/6" in {
+      val currentTime = new DateTime(2014, 4, 6, 0, 0, 0, 0, DateTimeZone.forID("Europe/London"))
+      Resolver(currentTime).endOfLastTaxYear shouldBe new LocalDate(2014, 4, 5)
+    } 
+  }
+  
+  "Requesting the end of a given tax year" should {
+    "return 2016/4/5 for the tax year 2015" in {
+      Resolver().endOfTaxYear(2015) shouldBe new LocalDate(2016, 4, 5)
+    }
+  }
 }
