@@ -14,10 +14,27 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.time.workingdays
+import sbt._
 
-import org.joda.time.LocalDate
+object AppDependencies {
 
-case class BankHolidaySet(division: String, events: List[BankHoliday])
+  val compile = Seq(
+    "com.github.nscala-time" %% "nscala-time" % "2.16.0"
+  )
 
-case class BankHoliday(title: String, date: LocalDate)
+  trait TestDependencies {
+    lazy val scope: String = "test"
+    lazy val test: Seq[ModuleID] = ???
+  }
+
+  object Test {
+    def apply() = new TestDependencies {
+      override lazy val test = Seq(
+        "org.scalatest" %% "scalatest" % "3.0.3" % scope,
+        "org.pegdown" % "pegdown" % "1.6.0" % scope
+      )
+    }.test
+  }
+
+  def apply() = compile ++ Test()
+}
