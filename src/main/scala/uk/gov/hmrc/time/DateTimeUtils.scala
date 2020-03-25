@@ -19,7 +19,7 @@ package uk.gov.hmrc.time
 import org.joda.time._
 
 trait DateTimeUtils {
-  def now = DateTime.now.withZone(DateTimeZone.UTC)
+  def now: DateTime = DateTime.now.withZone(DateTimeZone.UTC)
 
   def daysBetween(start: LocalDate, end: LocalDate): Int =
     Days.daysBetween(start.toDateTimeAtStartOfDay(DateTimeZone.UTC), end.toDateTimeAtStartOfDay(DateTimeZone.UTC)).getDays

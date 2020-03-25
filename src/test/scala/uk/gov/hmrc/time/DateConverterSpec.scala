@@ -17,9 +17,10 @@
 package uk.gov.hmrc.time
 
 import org.joda.time.{ LocalDate, DateTimeZone, DateTime }
-import org.scalatest.{WordSpecLike, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 
-class DateConverterSpec extends WordSpecLike with Matchers {
+class DateConverterSpec extends AnyWordSpecLike with Matchers {
 
   import DateConverter._
 

@@ -13,8 +13,8 @@ lazy val root = Project(libName, file("."))
     scalaVersion := "2.12.10",
     crossScalaVersions := Seq("2.11.12", "2.12.10"),
     libraryDependencies ++= Seq(
-      "com.github.nscala-time"  %% "nscala-time"      % "2.16.0",
-      "org.scalatest"           %% "scalatest"        % "3.0.3"     % Test,
-      "org.pegdown"             % "pegdown"           % "1.6.0"     % Test
+      "com.github.nscala-time"  %% "nscala-time"      % "2.22.0",
+      "com.vladsch.flexmark"    % "flexmark-all"      % "0.35.10"  % Test,
+      "org.scalatest"           %% "scalatest"        % "3.1.1"    % Test
     )
   )
