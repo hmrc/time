@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,10 @@
 package uk.gov.hmrc.time
 
 import org.joda.time.{ LocalDate, DateTimeZone, DateTime }
-import org.scalatest.{WordSpecLike, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 
-class DateConverterSpec extends WordSpecLike with Matchers {
+class DateConverterSpec extends AnyWordSpecLike with Matchers {
 
   import DateConverter._
 

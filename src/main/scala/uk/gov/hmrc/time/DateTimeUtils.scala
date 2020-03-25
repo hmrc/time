@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package uk.gov.hmrc.time
 import org.joda.time._
 
 trait DateTimeUtils {
-  def now = DateTime.now.withZone(DateTimeZone.UTC)
+  def now: DateTime = DateTime.now.withZone(DateTimeZone.UTC)
 
   def daysBetween(start: LocalDate, end: LocalDate): Int =
     Days.daysBetween(start.toDateTimeAtStartOfDay(DateTimeZone.UTC), end.toDateTimeAtStartOfDay(DateTimeZone.UTC)).getDays

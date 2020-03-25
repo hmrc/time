@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,10 @@
 package uk.gov.hmrc.time.workingdays
 
 import org.joda.time.LocalDate
-import org.scalatest.{WordSpecLike, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpecLike
 
-class WorkingDaysPackageLocalDateWithHolidaysSpec extends WordSpecLike with Matchers {
+class WorkingDaysPackageLocalDateWithHolidaysSpec extends AnyWordSpecLike with Matchers {
   implicit val bankHolidays = BankHolidays.eventSet
 
   "LocalDateWithHoliday - isBankHoliday" should {
