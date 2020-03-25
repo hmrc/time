@@ -1,15 +1,20 @@
-import uk.gov.hmrc.DefaultBuildSettings.targetJvm
+import uk.gov.hmrc.DefaultBuildSettings._
 
-enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
+lazy val libName = "time"
 
-name := "time"
-
-majorVersion := 3
-makePublicallyAvailableOnBintray := true
-
-scalaVersion := "2.12.8"
-crossScalaVersions := Seq("2.12.8", "2.11.11")
-targetJvm := "jvm-1.8"
-
-libraryDependencies ++= AppDependencies()
-
+lazy val root = Project(libName, file("."))
+  .enablePlugins(SbtAutoBuildPlugin, SbtGitVersioning, SbtArtifactory)
+  .settings(defaultSettings(): _*)
+  .settings(
+    majorVersion := 3,
+    makePublicallyAvailableOnBintray := true,
+  )
+  .settings(
+    scalaVersion := "2.12.10",
+    crossScalaVersions := Seq("2.11.12", "2.12.10"),
+    libraryDependencies ++= Seq(
+      "com.github.nscala-time"  %% "nscala-time"      % "2.16.0",
+      "org.scalatest"           %% "scalatest"        % "3.0.3"     % Test,
+      "org.pegdown"             % "pegdown"           % "1.6.0"     % Test
+    )
+  )
