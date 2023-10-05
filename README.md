@@ -1,5 +1,8 @@
-time
-====
+[DEPRECATED]
+=
+*Use java.time instead of joda.time and inline anything you need*
+
+# time
 
 
 This is a date and time utility featuring some specific utilities
@@ -18,6 +21,5 @@ This is a date and time utility featuring some specific utilities
 For Java 7 use a version <= 2.0.0
 
 ## License ##
- 
-This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
 
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
